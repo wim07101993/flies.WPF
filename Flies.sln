@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flies.Wpf", "Flies.Wpf\Flies.Wpf.csproj", "{C9FBD892-574C-45C2-B48A-3E07C7B9F0C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flies.Shared", "Flies.Service\Flies.Shared.csproj", "{67B83FC3-09BD-400B-AD2A-8C45D38BBAA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flies.Shared", "Flies.Shared\Flies.Shared.csproj", "{67B83FC3-09BD-400B-AD2A-8C45D38BBAA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
