@@ -16,7 +16,7 @@ namespace Flies.Shared
         public uint PortNumber
         {
             get => _portNumber;
-            set => SetProperty(ref _portNumber)
+            set => SetProperty(ref _portNumber, value);
         }
     }
 }
