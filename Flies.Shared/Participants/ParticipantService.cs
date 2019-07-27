@@ -36,14 +36,14 @@ namespace Flies.Shared.Participants
 
         #region METHODS
 
-        public async Task<Participant> Create(Participant participant)
+        public async Task<Participant> CreateAsync(Participant participant)
         {
             var poco = new ParticipantPOCO(participant);
             var response = await Url.PostJsonAsync(poco);
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task<Participant> GetParticipant(uint id)
+        public async Task<Participant> GetParticipantAsync(uint id)
         {
             var poco = await Url
                 .AppendPathSegment(id)
@@ -52,7 +52,7 @@ namespace Flies.Shared.Participants
             return poco.ToParticipant();
         }
 
-        public async Task<IList<Participant>> GetParticipants()
+        public async Task<IList<Participant>> GetParticipantsAsync()
         {
             var pocos = await Url.GetJsonAsync<List<ParticipantPOCO>>();
             return pocos
@@ -60,7 +60,7 @@ namespace Flies.Shared.Participants
                 .ToList();
         }
 
-        public async Task<Participant> IncreaseScore(uint id, ushort amount)
+        public async Task<Participant> IncreaseScoreAsync(uint id, ushort amount)
         {
             var response = await Url
                 .AppendPathSegment(id)
@@ -71,7 +71,7 @@ namespace Flies.Shared.Participants
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task<Participant> DecreaseScore(uint id, ushort amount)
+        public async Task<Participant> DecreaseScoreAsync(uint id, ushort amount)
         {
             var response = await Url
                 .AppendPathSegment(id)
@@ -82,7 +82,7 @@ namespace Flies.Shared.Participants
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task<Participant> UpdateName(uint id, string name)
+        public async Task<Participant> UpdateNameAsync(uint id, string name)
         {
             var response = await Url
                 .AppendPathSegment(id)
@@ -92,7 +92,7 @@ namespace Flies.Shared.Participants
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task<Participant> UpdateScore(uint id, ushort score)
+        public async Task<Participant> UpdateScoreAsync(uint id, ushort score)
         {
             var response = await Url
                .AppendPathSegment(id)
@@ -102,7 +102,7 @@ namespace Flies.Shared.Participants
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task DeleteScore(uint id)
+        public async Task DeleteParticipantAsync(uint id)
         {
             var response = await Url
                .AppendPathSegment(id)

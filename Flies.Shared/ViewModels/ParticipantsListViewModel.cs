@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Flies.Shared.Participants;
@@ -30,15 +29,15 @@ namespace Flies.Shared.ViewModels
             _unityContainer = unityContainer;
             _participantService = participantService;
 
-            AddParticipantCommand = new DelegateCommand(AddParticipant);
-            DeleteParticipantCommand = new DelegateCommand<Participant>(DeleteParticipant)
+            AddParticipantCommand = new DelegateCommand(() => _ = AddParticipantAsync());
+            DeleteParticipantCommand = new DelegateCommand<Participant>(x => _ = DeleteParticipantAsync(x));
 
             _ = InitAsync();
         }
 
         public async Task InitAsync()
         {
-            var participants = await _participantService.GetParticipants();
+            var participants = await _participantService.GetParticipantsAsync();
             foreach (var participant in participants)
             {
                 var detailVm = _unityContainer.Resolve<IParticipantDetailViewModel>();
@@ -68,14 +67,14 @@ namespace Flies.Shared.ViewModels
 
         #region METHODS
 
-        private void AddParticipant()
+        private async Task AddParticipantAsync()
         {
             // TODO
         }
 
-        private void DeleteParticipant(Participant participant)
+        private async Task DeleteParticipantAsync(Participant participant)
         {
-            _participantService.DeleteScore(participant.Id);
+            await _participantService.DeleteParticipantAsync(participant.Id);
         }
 
         #endregion METHDOS

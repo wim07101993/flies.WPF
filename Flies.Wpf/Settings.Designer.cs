@@ -25,17 +25,17 @@ namespace Flies.Wpf {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::Flies.Shared.ParticipantServiceSettings ParticipantServiceSettings {
+        public global::Flies.Shared.Participants.ParticipantServiceSettings ParticipantServiceSettings {
             get {
-                return ((global::Flies.Shared.ParticipantServiceSettings)(this["ParticipantServiceSettings"]));
+                return ((global::Flies.Shared.Participants.ParticipantServiceSettings)(this["ParticipantServiceSettings"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::Flies.Shared.Participant LastUsedParticipant {
+        public global::Flies.Shared.Participants.Participant LastUsedParticipant {
             get {
-                return ((global::Flies.Shared.Participant)(this["LastUsedParticipant"]));
+                return ((global::Flies.Shared.Participants.Participant)(this["LastUsedParticipant"]));
             }
             set {
                 this["LastUsedParticipant"] = value;

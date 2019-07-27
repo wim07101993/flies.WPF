@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Flies.Wpf" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ParticipantServiceSettings" Type="Flies.Shared.ParticipantServiceSettings" Scope="Application">
+    <Setting Name="ParticipantServiceSettings" Type="Flies.Shared.Participants.ParticipantServiceSettings" Scope="Application">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LastUsedParticipant" Type="Flies.Shared.Participant" Scope="User">
+    <Setting Name="LastUsedParticipant" Type="Flies.Shared.Participants.Participant" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

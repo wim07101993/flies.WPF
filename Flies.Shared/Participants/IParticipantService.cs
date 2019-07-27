@@ -5,16 +5,16 @@ namespace Flies.Shared.Participants
 {
     public interface IParticipantService
     {
-        Task<Participant> Create(Participant participant);
+        Task<Participant> CreateAsync(Participant participant);
 
-        Task<IList<Participant>> GetParticipants();
-        Task<Participant> GetParticipant(uint id);
+        Task<IList<Participant>> GetParticipantsAsync();
+        Task<Participant> GetParticipantAsync(uint id);
 
-        Task<Participant> UpdateScore(uint id, ushort score);
-        Task<Participant> UpdateName(uint id, string name);
-        Task<Participant> IncreaseScore(uint id, ushort amount);
-        Task<Participant> DecreaseScore(uint id, ushort amount);
+        Task<Participant> UpdateScoreAsync(uint id, ushort score);
+        Task<Participant> UpdateNameAsync(uint id, string name);
+        Task<Participant> IncreaseScoreAsync(uint id, ushort amount);
+        Task<Participant> DecreaseScoreAsync(uint id, ushort amount);
 
-        Task DeleteScore(uint id);
+        Task DeleteParticipantAsync(uint id);
     }
 }
