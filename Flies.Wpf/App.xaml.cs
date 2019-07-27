@@ -1,5 +1,8 @@
 ﻿using Flies.Shared.Participants;
+using Flies.Shared.ViewModelInterfaces;
+using Flies.Shared.ViewModels;
 using Flies.Wpf.Views;
+using Prism.Events;
 using System.Windows;
 using Unity;
 
@@ -22,7 +25,11 @@ namespace Flies.Wpf
         private void InitUnityContainer()
         {
             UnityContainer = new UnityContainer();
-            UnityContainer.RegisterSingleton<IParticipantService, ParticipantService>();
+            UnityContainer
+                .RegisterSingleton<IEventAggregator, EventAggregator>()
+                .RegisterSingleton<IParticipantService, ParticipantService>()
+                .RegisterType<IParticipantListViewModel, ParticipantListViewModel>()
+                .RegisterType<IParticipantDetailViewModel, ParticipantDetailViewModel>();
         }
     }
 }

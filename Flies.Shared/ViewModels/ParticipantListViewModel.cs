@@ -9,7 +9,7 @@ using Unity;
 
 namespace Flies.Shared.ViewModels
 {
-    public class ParticipantsListViewModel : AViewModelBase, IParticipantListViewModel
+    public class ParticipantListViewModel : AViewModelBase, IParticipantListViewModel
     {
         #region FIELDS
 
@@ -23,7 +23,7 @@ namespace Flies.Shared.ViewModels
 
         #region CONSTRUCTOR
 
-        public ParticipantsListViewModel(IEventAggregator eventAggregator, IUnityContainer unityContainer, IParticipantService participantService)
+        public ParticipantListViewModel(IEventAggregator eventAggregator, IUnityContainer unityContainer, IParticipantService participantService)
             : base(eventAggregator)
         {
             _unityContainer = unityContainer;
