@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Flies.Shared
+namespace Flies.Shared.Participants
 {
     public interface IParticipantService
     {

@@ -1,4 +1,4 @@
-﻿using Flies.Shared;
+﻿using Flies.Shared.Participants;
 using Flies.Wpf.Views;
 using System.Windows;
 using Unity;

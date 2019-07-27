@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Flies.Shared
+namespace Flies.Shared.Participants
 {
     internal class ParticipantPOCO
     {

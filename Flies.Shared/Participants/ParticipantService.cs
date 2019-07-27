@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Flies.Shared
+namespace Flies.Shared.Participants
 {
     public class ParticipantService : IParticipantService
     {

@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace Flies.Shared
+namespace Flies.Shared.Participants
 {
     public class ParticipantServiceSettings : BindableBase
     {
