@@ -5,6 +5,8 @@ namespace Flies.Shared.ViewModelInterfaces
 {
     public interface IParticipantDetailViewModel : IViewModelBase
     {
+        Participant Item { get; set; }
+
         string Name { get; set; }
         ushort Score { get; set; }
 
