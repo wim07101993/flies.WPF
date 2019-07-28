@@ -15,5 +15,6 @@ namespace Flies.Shared.ViewModelInterfaces
         ICommand SaveCommand { get; }
         ICommand IncreaseScoreCommand { get; }
         ICommand DecreaseScoreCommand { get; }
+        ICommand CancelCommand { get; }
     }
 }

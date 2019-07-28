@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Flies.Shared.Participants;
 using Flies.Shared.ViewModelInterfaces;
@@ -32,7 +33,6 @@ namespace Flies.Shared.ViewModels
             Item = participant;
         }
 
-
         public ParticipantDetailViewModel(IEventAggregator eventAggregator, IParticipantService participantService)
             : base(eventAggregator)
         {
@@ -42,6 +42,7 @@ namespace Flies.Shared.ViewModels
             SaveCommand = new DelegateCommand(() => _ = SaveAsync());
             IncreaseScoreCommand = new DelegateCommand(() => _ = IncreaseScoreAsync());
             DecreaseScoreCommand = new DelegateCommand(() => _ = DecreaseScoreAsync());
+            CancelCommand = new DelegateCommand(() => _ = CancelAsync());
         }
 
         #endregion CONSTRUCTOR
@@ -103,6 +104,7 @@ namespace Flies.Shared.ViewModels
         public ICommand SaveCommand { get; }
         public ICommand IncreaseScoreCommand { get; }
         public ICommand DecreaseScoreCommand { get; }
+        public ICommand CancelCommand { get; }
 
         #endregion PROPERTIES
 
@@ -132,13 +134,30 @@ namespace Flies.Shared.ViewModels
 
             if (_changedName)
             {
-                participant = await _participantService.UpdateNameAsync(Item.Id, Name);
+                try
+                {
+                    participant = await _participantService.UpdateNameAsync(Item.Id, Name);
+
+                }
+                catch (Exception e)
+                {
+                    // TODO
+                    throw;
+                }
                 _changedName = false;
             }
 
             if (_changedScore)
             {
-                participant = await _participantService.UpdateScoreAsync(Item.Id, Score);
+                try
+                {
+                    participant = await _participantService.UpdateScoreAsync(Item.Id, Score);
+                }
+                catch (Exception e)
+                {
+                    // TODO
+                    throw;
+                }
                 _changedScore = false;
             }
 
@@ -169,6 +188,11 @@ namespace Flies.Shared.ViewModels
             Item = await _participantService.DecreaseScoreAsync(Item.Id, 1);
 
             IsApplyingChanges = false;
+        }
+
+        private async Task CancelAsync()
+        {
+            Item = await _participantService.GetParticipantAsync(Item.Id);
         }
 
         #endregion METHODS

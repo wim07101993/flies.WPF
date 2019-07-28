@@ -82,11 +82,11 @@ namespace Flies.Shared.Participants
             return await GetParticipantFromResponse(response);
         }
 
-        public async Task<Participant> UpdateNameAsync(uint id, string name)
+        public async Task<Participant> UpdateNameAsync(uint id, string newName)
         {
             var response = await Url
-                .AppendPathSegment(id)
-                .SetQueryParams(new { name })
+                .AppendPathSegments(id, "name")
+                .SetQueryParams(new { newName })
                 .PutStringAsync("");
 
             return await GetParticipantFromResponse(response);
@@ -95,7 +95,7 @@ namespace Flies.Shared.Participants
         public async Task<Participant> UpdateScoreAsync(uint id, ushort score)
         {
             var response = await Url
-               .AppendPathSegment(id)
+               .AppendPathSegments(id,"score")
                .SetQueryParams(new { score })
                .PutStringAsync("");
 
