@@ -7,6 +7,7 @@ namespace Flies.Shared.ViewModelInterfaces
     {
         Participant Item { get; set; }
 
+        uint Id { get; }
         string Name { get; set; }
         ushort Score { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Flies.Shared.Participants;
@@ -6,6 +7,7 @@ using Flies.Shared.ViewModelInterfaces;
 using Prism.Commands;
 using Prism.Events;
 using Unity;
+using Unity.Resolution;
 
 namespace Flies.Shared.ViewModels
 {
@@ -16,7 +18,7 @@ namespace Flies.Shared.ViewModels
         private readonly IParticipantService _participantService;
         private readonly IUnityContainer _unityContainer;
 
-        private Participant _selectedItem;
+        private IParticipantDetailViewModel _selectedItem;
 
         #endregion FIELDS
 
@@ -29,20 +31,23 @@ namespace Flies.Shared.ViewModels
             _unityContainer = unityContainer;
             _participantService = participantService;
 
-            AddParticipantCommand = new DelegateCommand(() => _ = AddParticipantAsync());
-            DeleteParticipantCommand = new DelegateCommand<Participant>(x => _ = DeleteParticipantAsync(x));
+            AddParticipantCommand = new DelegateCommand<ParticipantDetailViewModel>(x => _ = AddParticipantAsync(x));
+            DeleteParticipantCommand = new DelegateCommand<ParticipantDetailViewModel>(x => _ = DeleteParticipantAsync(x));
+            RefreshCommand = new DelegateCommand(() => _ = RefreshParticipantAsync());
 
             _ = InitAsync();
         }
 
         public async Task InitAsync()
         {
-            var participants = await _participantService.GetParticipantsAsync();
-            foreach (var participant in participants)
+            try
             {
-                var detailVm = _unityContainer.Resolve<IParticipantDetailViewModel>();
-                detailVm.Item = participant;
-                ItemsSource.Add(detailVm);
+                await RefreshParticipantAsync();
+            }
+            catch (Exception e)
+            {
+                // TODO
+                throw;
             }
         }
 
@@ -53,7 +58,7 @@ namespace Flies.Shared.ViewModels
 
         public ObservableCollection<IParticipantDetailViewModel> ItemsSource { get; } = new ObservableCollection<IParticipantDetailViewModel>();
 
-        public Participant SelectedItem
+        public IParticipantDetailViewModel SelectedItem
         {
             get => _selectedItem;
             set => SetProperty(ref _selectedItem, value);
@@ -61,20 +66,36 @@ namespace Flies.Shared.ViewModels
 
         public ICommand AddParticipantCommand { get; }
         public ICommand DeleteParticipantCommand { get; }
+        public ICommand RefreshCommand { get; }
 
         #endregion PROPERTIES
 
 
         #region METHODS
 
-        private async Task AddParticipantAsync()
+        private IParticipantDetailViewModel CreateParticipantDetailViewModel(Participant participant)
         {
-            // TODO
+            return _unityContainer.Resolve<IParticipantDetailViewModel>(new ParameterOverride("participant", participant));
         }
 
-        private async Task DeleteParticipantAsync(Participant participant)
+        private async Task AddParticipantAsync(ParticipantDetailViewModel viewModel)
         {
-            await _participantService.DeleteParticipantAsync(participant.Id);
+            var participant = await _participantService.CreateAsync(viewModel.Item);
+            ItemsSource.Add(CreateParticipantDetailViewModel(participant));
+        }
+
+        private async Task DeleteParticipantAsync(ParticipantDetailViewModel viewModel)
+        {
+            await _participantService.DeleteParticipantAsync(viewModel.Id);
+        }
+
+        private async Task RefreshParticipantAsync()
+        {
+            var participants = await _participantService.GetParticipantsAsync();
+
+            ItemsSource.Clear();
+            foreach (var participant in participants)
+                ItemsSource.Add(CreateParticipantDetailViewModel(participant));
         }
 
         #endregion METHDOS

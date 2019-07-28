@@ -7,9 +7,10 @@ namespace Flies.Shared.ViewModelInterfaces
     public interface IParticipantListViewModel : IViewModelBase
     {
         ObservableCollection<IParticipantDetailViewModel> ItemsSource { get; }
-        Participant SelectedItem { get; set; }
+        IParticipantDetailViewModel SelectedItem { get; set; }
 
         ICommand AddParticipantCommand { get; }
         ICommand DeleteParticipantCommand { get; }
+        ICommand RefreshCommand { get; }
     }
 }

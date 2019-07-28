@@ -26,6 +26,13 @@ namespace Flies.Shared.ViewModels
 
         #region CONSTRUCTOR
 
+        public ParticipantDetailViewModel(IEventAggregator eventAggregator, IParticipantService participantService, Participant participant)
+            : this(eventAggregator, participantService)
+        {
+            Item = participant;
+        }
+
+
         public ParticipantDetailViewModel(IEventAggregator eventAggregator, IParticipantService participantService)
             : base(eventAggregator)
         {
@@ -45,8 +52,18 @@ namespace Flies.Shared.ViewModels
         public Participant Item
         {
             get => _item;
-            set => SetProperty(ref _item, value);
+            set
+            {
+                if (!SetProperty(ref _item, value))
+                    return;
+
+                RaisePropertyChanged(nameof(Id));
+                RaisePropertyChanged(nameof(Name));
+                RaisePropertyChanged(nameof(Score));
+            }
         }
+
+        public uint Id => Item.Id;
 
         public string Name
         {
