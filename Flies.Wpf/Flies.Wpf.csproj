@@ -89,9 +89,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Validation\IpAddressValidationRule.cs" />
+    <Compile Include="Validation\RequiredValidationRule.cs" />
+    <Compile Include="Validation\UShortValidationRule.cs" />
+    <Compile Include="ViewModelInterfaces\ISettingsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\ParticipantsList.xaml.cs">
       <DependentUpon>ParticipantsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -108,6 +115,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ParticipantsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

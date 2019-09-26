@@ -8,6 +8,7 @@ using Prism.Events;
 using System.Windows;
 using Unity;
 using Flies.Wpf.Properties;
+using Settings = Flies.Wpf.Properties.Settings;
 
 namespace Flies.Wpf
 {
@@ -48,6 +49,7 @@ namespace Flies.Wpf
                 .RegisterSingleton<IParticipantService, ParticipantService>()
                 .RegisterType<IParticipantListViewModel, ParticipantListViewModel>()
                 .RegisterType<IParticipantDetailViewModel, ParticipantDetailViewModel>()
+                .RegisterType<ISettingsViewModel, SettingsViewModel>()
                 .RegisterType<IMainWindowViewModel, MainWindowViewModel>();
         }
     }

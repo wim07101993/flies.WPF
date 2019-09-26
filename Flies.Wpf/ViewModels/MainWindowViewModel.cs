@@ -1,4 +1,5 @@
-﻿using Flies.Shared.ViewModelInterfaces;
+﻿using Flies.Shared.Participants;
+using Flies.Shared.ViewModelInterfaces;
 using Flies.Shared.ViewModels;
 using Flies.Wpf.ViewModelInterfaces;
 using Prism.Events;
@@ -9,10 +10,12 @@ namespace Flies.Wpf.ViewModels
     {
         #region CONSTRUCTOR
 
-        public MainWindowViewModel(IEventAggregator eventAggregator, IParticipantListViewModel participantListViewModel) 
+        public MainWindowViewModel(IEventAggregator eventAggregator, 
+            IParticipantListViewModel participantListViewModel, ISettingsViewModel settingsViewModel) 
             : base(eventAggregator)
         {
             ParticipantListViewModel = participantListViewModel;
+            SettingsViewModel = settingsViewModel;
         }
 
         #endregion CONSTRUCTOR
@@ -21,6 +24,7 @@ namespace Flies.Wpf.ViewModels
         #region PROPERTIES
 
         public IParticipantListViewModel ParticipantListViewModel { get; }
+        public ISettingsViewModel SettingsViewModel { get; }
 
         #endregion PROPERTIES
     }

@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="Flies.Wpf.Views.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:validation="clr-namespace:Flies.Wpf.Validation"
+    mc:Ignorable="d">
+    <StackPanel>
+        <TextBox
+            MinWidth="200"
+            Margin="0,8,0,8"
+            materialDesign:HintAssist.Hint="IP address"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding
+                    Mode="TwoWay"
+                    Path="ParticipantServiceSettings.IpAddress"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:RequiredValidationRule />
+                        <validation:IpAddressValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox
+            MinWidth="100"
+            Margin="0,8,0,8"
+            materialDesign:HintAssist.Hint="Port"
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+            <TextBox.Text>
+                <Binding
+                    Mode="TwoWay"
+                    Path="ParticipantServiceSettings.PortNumber"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validation:RequiredValidationRule />
+                        <validation:UShortValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                Margin="0,8,0,8"
+                Command="{Binding SaveCommand}"
+                Content="Save"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+            <Button
+                Margin="8,8,0,8"
+                Command="{Binding ResetCommand}"
+                Content="Cancel" />
+        </StackPanel>
+    </StackPanel>
+</UserControl>

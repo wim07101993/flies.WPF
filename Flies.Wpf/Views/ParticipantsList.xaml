@@ -16,6 +16,7 @@
         <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
     </UserControl.Resources>
 
+
     <DockPanel>
         <materialDesign:ColorZone
             Padding="16"
@@ -38,6 +39,13 @@
                         Command="{Binding RefreshCommand}"
                         Style="{DynamicResource MaterialDesignToolForegroundButton}">
                         <materialDesign:PackIcon Kind="Refresh" />
+                    </Button>
+                    <Button
+                        Margin="8,0,0,0"
+                        Panel.ZIndex="0"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        Style="{DynamicResource MaterialDesignToolForegroundButton}">
+                        <materialDesign:PackIcon Kind="Settings" />
                     </Button>
                 </StackPanel>
                 <StackPanel materialDesign:RippleAssist.IsCentered="True" Orientation="Horizontal">

@@ -38,7 +38,7 @@ namespace Flies.Shared.Participants
 
         public async Task<Participant> CreateAsync(Participant participant)
         {
-            var poco = new ParticipantPOCO(participant);
+            var poco = new ParticipantDTO(participant);
             var response = await Url.PostJsonAsync(poco);
             return await GetParticipantFromResponse(response);
         }
@@ -47,16 +47,16 @@ namespace Flies.Shared.Participants
         {
             var poco = await Url
                 .AppendPathSegment(id)
-                .GetJsonAsync<ParticipantPOCO>();
+                .GetJsonAsync<ParticipantDTO>();
 
-            return poco.ToParticipant();
+            return (Participant)poco;
         }
 
         public async Task<IList<Participant>> GetParticipantsAsync()
         {
-            var pocos = await Url.GetJsonAsync<List<ParticipantPOCO>>();
+            var pocos = await Url.GetJsonAsync<List<ParticipantDTO>>();
             return pocos
-                .Select(x => x.ToParticipant())
+                .Select(x => (Participant)x)
                 .ToList();
         }
 
@@ -112,8 +112,7 @@ namespace Flies.Shared.Participants
         private async Task<Participant> GetParticipantFromResponse(HttpResponseMessage response)
         {
             var content = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ParticipantPOCO>(content)
-                .ToParticipant();
+            return (Participant)JsonConvert.DeserializeObject<ParticipantDTO>(content);
         }
 
         #endregion METHDOS
