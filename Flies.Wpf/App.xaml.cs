@@ -7,7 +7,6 @@ using Flies.Wpf.Views;
 using Prism.Events;
 using System.Windows;
 using Unity;
-using Flies.Wpf.Properties;
 using Settings = Flies.Wpf.Properties.Settings;
 
 namespace Flies.Wpf

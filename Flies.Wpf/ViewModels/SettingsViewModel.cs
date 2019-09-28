@@ -20,6 +20,7 @@ namespace Flies.Wpf.ViewModels
                     IpAddress = "10.101.90.59",
                     PortNumber = 5000,
                 };
+                Settings.Default.Save();
             }
 
             SaveCommand = new DelegateCommand(Save);
@@ -34,6 +35,10 @@ namespace Flies.Wpf.ViewModels
 
 
         public void Save() => Settings.Default.Save();
-        public void Reset() => Settings.Default.Reload();
+        public void Reset()
+        {
+            Settings.Default.Reload();
+            RaisePropertyChanged(nameof(ParticipantServiceSettings));
+        }
     }
 }

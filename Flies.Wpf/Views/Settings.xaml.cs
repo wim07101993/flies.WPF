@@ -1,28 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Flies.Wpf.Views
 {
-    /// <summary>
-    /// Interaction logic for Settings.xaml
-    /// </summary>
-    public partial class Settings : UserControl
+    public partial class Settings
     {
         public Settings()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DrawerHost.CloseDrawerCommand?.Execute(Dock.Right, (Button)sender);
         }
     }
 }

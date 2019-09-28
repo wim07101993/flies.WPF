@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Flies.Shared.Events;
 using Flies.Shared.Participants;
 using Flies.Shared.ViewModelInterfaces;
 using Prism.Commands;
@@ -111,19 +112,33 @@ namespace Flies.Shared.ViewModels
 
         #region METHODS
 
-        private async Task DeleteAsync()
+        public async Task DeleteAsync()
         {
             if (IsApplyingChanges)
                 return;
 
             IsApplyingChanges = true;
 
-            await _participantService.DeleteParticipantAsync(Item.Id);
+            await TryDeleteParticipantAsync(Item.Id);
 
             IsApplyingChanges = false;
         }
 
-        private async Task SaveAsync()
+        private async Task<bool> TryDeleteParticipantAsync(uint id)
+        {
+            try
+            {
+                await _participantService.DeleteParticipantAsync(id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                EventAggregator.GetEvent<ExceptionEvent>().Publish(e);
+                return false;
+            }
+        }
+
+        public async Task SaveAsync()
         {
             if (IsApplyingChanges)
                 return;
@@ -141,8 +156,7 @@ namespace Flies.Shared.ViewModels
                 }
                 catch (Exception e)
                 {
-                    // TODO
-                    throw;
+                    EventAggregator.GetEvent<ExceptionEvent>().Publish(e);
                 }
                 _changedName = false;
             }
@@ -155,8 +169,7 @@ namespace Flies.Shared.ViewModels
                 }
                 catch (Exception e)
                 {
-                    // TODO
-                    throw;
+                    EventAggregator.GetEvent<ExceptionEvent>().Publish(e);
                 }
                 _changedScore = false;
             }
@@ -166,31 +179,41 @@ namespace Flies.Shared.ViewModels
             IsApplyingChanges = false;
         }
 
-        private async Task IncreaseScoreAsync()
+        public async Task IncreaseScoreAsync()
         {
             if (IsApplyingChanges)
                 return;
 
             IsApplyingChanges = true;
 
-            Item = await _participantService.IncreaseScoreAsync(Item.Id, 1);
+            Item = await TryIncreaseScoreAsync(Item.Id);
 
             IsApplyingChanges = false;
         }
 
-        private async Task DecreaseScoreAsync()
+        private async Task<Participant> TryIncreaseScoreAsync(uint id)
+        {
+            return await _participantService.IncreaseScoreAsync(id, 1);
+        }
+
+        public async Task DecreaseScoreAsync()
         {
             if (IsApplyingChanges)
                 return;
 
             IsApplyingChanges = true;
 
-            Item = await _participantService.DecreaseScoreAsync(Item.Id, 1);
+            Item = await TryDecreaseScoreAsync(Item.Id);
 
             IsApplyingChanges = false;
         }
 
-        private async Task CancelAsync()
+        private async Task<Participant> TryDecreaseScoreAsync(uint id)
+        {
+            return await _participantService.DecreaseScoreAsync(id, 1);
+        }
+
+        public async Task CancelAsync()
         {
             Item = await _participantService.GetParticipantAsync(Item.Id);
         }

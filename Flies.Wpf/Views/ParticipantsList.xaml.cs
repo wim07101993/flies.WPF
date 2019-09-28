@@ -1,5 +1,4 @@
 ﻿using Flies.Shared.ViewModelInterfaces;
-using System.Windows.Input;
 
 namespace Flies.Wpf.Views
 {
@@ -15,17 +14,6 @@ namespace Flies.Wpf.Views
         {
             get => DataContext as IParticipantListViewModel;
             set => DataContext = value;
-        }
-
-
-        private void OnKeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Delete:
-                    ViewModel.DeleteParticipantCommand?.Execute(DataGrid.SelectedItem);
-                    break;
-            }
         }
     }
 }

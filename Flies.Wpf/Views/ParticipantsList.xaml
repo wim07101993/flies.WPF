@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:participants="clr-namespace:Flies.Shared.Participants;assembly=Flies.Shared"
     xmlns:viewModels="clr-namespace:Flies.Shared.ViewModelInterfaces;assembly=Flies.Shared"
     d:DataContext="{d:DesignInstance viewModels:IParticipantListViewModel}"
     d:DesignHeight="450"
@@ -14,6 +15,8 @@
 
     <UserControl.Resources>
         <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+
+        <participants:Participant x:Key="DefaultParticipant" Name="Name" />
     </UserControl.Resources>
 
 
@@ -30,22 +33,33 @@
                     <Button
                         Margin="8,0,0,0"
                         Panel.ZIndex="0"
+                        Command="{Binding AddParticipantCommand}"
+                        CommandParameter="{StaticResource DefaultParticipant}"
                         Style="{DynamicResource MaterialDesignToolForegroundButton}">
-                        <materialDesign:PackIcon Kind="Add" />
+                        <materialDesign:PackIcon
+                            Width="23"
+                            Height="23"
+                            Kind="Add" />
                     </Button>
                     <Button
                         Margin="8,0,0,0"
                         Panel.ZIndex="0"
                         Command="{Binding RefreshCommand}"
                         Style="{DynamicResource MaterialDesignToolForegroundButton}">
-                        <materialDesign:PackIcon Kind="Refresh" />
+                        <materialDesign:PackIcon
+                            Width="21"
+                            Height="21"
+                            Kind="Refresh" />
                     </Button>
                     <Button
                         Margin="8,0,0,0"
                         Panel.ZIndex="0"
                         Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                         Style="{DynamicResource MaterialDesignToolForegroundButton}">
-                        <materialDesign:PackIcon Kind="Settings" />
+                        <materialDesign:PackIcon
+                            Width="20"
+                            Height="20"
+                            Kind="Settings" />
                     </Button>
                 </StackPanel>
                 <StackPanel materialDesign:RippleAssist.IsCentered="True" Orientation="Horizontal">
@@ -93,7 +107,6 @@
                 AutoGenerateColumns="False"
                 Background="Transparent"
                 ItemsSource="{Binding ItemsSource}"
-                KeyUp="OnKeyDown"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single">
                 <DataGrid.Columns>

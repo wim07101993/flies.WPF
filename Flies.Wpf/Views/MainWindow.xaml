@@ -17,16 +17,18 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
-    <materialDesign:DrawerHost>
+    <materialDesign:DialogHost>
+        <materialDesign:DrawerHost>
 
-        <materialDesign:DrawerHost.RightDrawerContent>
-            <views:Settings
-                MinWidth="100"
-                Margin="24"
-                DataContext="{Binding SettingsViewModel}" />
-        </materialDesign:DrawerHost.RightDrawerContent>
+            <materialDesign:DrawerHost.RightDrawerContent>
+                <views:Settings
+                    MinWidth="100"
+                    Margin="24"
+                    DataContext="{Binding SettingsViewModel}" />
+            </materialDesign:DrawerHost.RightDrawerContent>
 
-        <views:ParticipantsList DataContext="{Binding ParticipantListViewModel}" />
+            <views:ParticipantsList DataContext="{Binding ParticipantListViewModel}" />
 
-    </materialDesign:DrawerHost>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Window>
